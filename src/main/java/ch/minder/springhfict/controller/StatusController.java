@@ -1,4 +1,4 @@
-package ch.minder.springhfict.Controller;
+package ch.minder.springhfict.controller;
 
 import ch.minder.springhfict.model.Status;
 import org.springframework.web.bind.annotation.GetMapping;
