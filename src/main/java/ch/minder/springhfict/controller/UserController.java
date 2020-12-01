@@ -17,18 +17,14 @@ public class UserController {
     @Autowired
     UserRepository userRepository;
 
-    @GetMapping("/login")
-    List<User> all() {
-        return userRepository.findByUsername("test");
-    }
-
     @PostMapping("/login")
     public User login(@RequestBody User user, HttpServletResponse response) {
-        for (User users : userRepository.findAll()) {
-            logger.info(users.toString());
+        String password = user.getPassword();
+        user = userRepository.findByUsername(user.getUsername());
+        if (user == null || !password.equals(user.getPassword())) {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            return null;
         }
-
-               // response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         return user;
     }
 
